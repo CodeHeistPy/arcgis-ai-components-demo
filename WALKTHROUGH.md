@@ -66,13 +66,19 @@ The signed-in user's ArcGIS Online org must have:
 - **AI assistants enabled**
 - **Beta apps not blocked**
 
-### 0d. OAuth Developer credentials
-- In ArcGIS Online, create a **Developer credentials** item with **OAuth 2.0 /
-  User authentication** (NOT app auth — there's no user context in app auth, and
-  the AI calls are gated on the signed-in user).
-- Add redirect URI `http://localhost:5173`.
-- Copy the **Client ID**. (You do *not* need a client secret — PKCE handles the
-  SPA case.)
+### 0d. OAuth credentials (register the app in ArcGIS Online)
+The app signs users in with a **Client ID** from an **OAuth credentials** item
+you create in ArcGIS Online. Quick version:
+
+- **Content → My Content → New item → Developer credentials → OAuth
+  credentials**, **user authentication** flow (NOT app auth — there's no user
+  context in app auth, and the AI calls are gated on the signed-in user).
+- Add redirect URL `http://localhost:5173` (add your deployed origin later via
+  **Settings → Application → Redirect URLs**).
+- Copy the **Client ID** → `.env.local` `VITE_ARCGIS_OAUTH_APP_ID`. No client
+  secret needed (PKCE). Requires a **Creator** user type or higher to create.
+
+**Full step-by-step (Esri-referenced):** see [`DEV-OAUTH-CREDENTIALS.md`](./DEV-OAUTH-CREDENTIALS.md).
 
 ---
 

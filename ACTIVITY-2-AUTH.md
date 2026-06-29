@@ -94,9 +94,10 @@ No code changes between the two — only the env value.
 - The user is a **member of the target org** (invited/added) — see Esri's
   *Invite and add members* and *Manage logins*.
 - **AI assistants enabled** and **beta apps not blocked** in the org settings.
-- The **OAuth Developer credentials** item uses **user authentication**, with
+- The **OAuth credentials** item uses **user authentication**, with
   `http://localhost:5173` registered as a redirect URI. (App authentication has
   no user context and will not work for the assistant — see `CLAUDE.md` §9.)
+  How to create it: [`DEV-OAUTH-CREDENTIALS.md`](./DEV-OAUTH-CREDENTIALS.md).
 
 ---
 

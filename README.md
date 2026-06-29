@@ -135,6 +135,7 @@ src/
 | `DEMO.md` | A run-sheet template for presenting it live |
 | `ACTIVITY-2-AUTH.md` | Connecting to your org — **SAML vs built-in** users |
 | `ACTIVITY-2-DATA-EXPLORER.md` | **No-code** path — the Instant Apps Data Explorer template for GIS users |
+| `DEV-OAUTH-CREDENTIALS.md` | Dev setup — register the app & create OAuth credentials in ArcGIS Online |
 | `CLAUDE.md` | Full project context + every known gotcha |
 | `docs/slides/` | A regenerable slide deck of the whole story |
 
