@@ -240,6 +240,14 @@ The OAuth client ID comes from an ArcGIS Online **Developer credentials** item
 (OAuth 2.0 **user** auth). Redirect URI for local dev: `http://localhost:5173`.
 You need only the Client ID — no secret (PKCE).
 
+**Built-in vs SAML users:** both use the same OAuth 2.0 user-auth flow and the
+same app code — the only lever is `VITE_PORTAL_URL` (→ `esriConfig.portalUrl`
+and `OAuthInfo.portalUrl`). `https://www.arcgis.com` shows the generic sign-in;
+an org URL `https://<org-key>.maps.arcgis.com` targets the org directly and
+routes SAML ("organization-specific" / formerly "enterprise") members to their
+identity provider. SAML usernames carry the org URL key as a suffix. Full
+walkthrough + Esri references: **ACTIVITY-2-AUTH.md**.
+
 ### Dev loop
 
 ```bash

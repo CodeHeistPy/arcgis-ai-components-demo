@@ -11,6 +11,12 @@ import { defineCustomElements as defineCalciteElements } from "@esri/calcite-com
 import { defineCustomElements as defineMapElements } from "@arcgis/map-components/loader";
 import { defineCustomElements as defineAiElements } from "@arcgis/ai-components/loader";
 
+// PORTAL_URL drives both esriConfig.portalUrl and OAuthInfo.portalUrl below.
+// It's the only difference between connecting built-in vs SAML users — both use
+// the same OAuth 2.0 user-auth flow. Use https://www.arcgis.com for the generic
+// sign-in, or an org URL (https://<org-key>.maps.arcgis.com) to target your org
+// directly and route SAML members to their identity provider. See
+// ACTIVITY-2-AUTH.md for the full SAML-vs-built-in walkthrough.
 const PORTAL_URL = import.meta.env.VITE_PORTAL_URL ?? "https://www.arcgis.com";
 const OAUTH_APP_ID = import.meta.env.VITE_ARCGIS_OAUTH_APP_ID;
 

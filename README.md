@@ -133,6 +133,7 @@ src/
 | `WALKTHROUGH.md` | Step-by-step build from scratch |
 | `LESSONS-LEARNED.md` | Gotchas and guidelines (read before you start) |
 | `DEMO.md` | A run-sheet template for presenting it live |
+| `ACTIVITY-2-AUTH.md` | Connecting to your org — **SAML vs built-in** users |
 | `CLAUDE.md` | Full project context + every known gotcha |
 | `docs/slides/` | A regenerable slide deck of the whole story |
 
