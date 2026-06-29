@@ -13,8 +13,12 @@ npm install                 # pptxgenjs, react-icons, react, react-dom, sharp, j
 node build.js               # writes the .pptx
 ```
 
-The deck is 9 slides: title · concept/architecture · stack · Phase 1 vs 2 ·
-10-step build · gotchas · prompt do/don't · demo run sheet · guidelines.
+The deck is 10 slides: title · concept/architecture · **the GIS side comes
+first (metadata + embeddings)** · stack · Phase 1 vs 2 · 10-step build ·
+gotchas · prompt do/don't · demo run sheet · guidelines.
+
+Footers auto-number from `pres.slides.length`, so inserting/reordering slides
+needs no manual page-number changes.
 
 ## Visual QA (Windows, PowerPoint installed)
 

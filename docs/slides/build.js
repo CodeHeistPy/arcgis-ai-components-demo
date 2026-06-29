@@ -54,11 +54,11 @@ async function iconCircle(slide, IconComponent, circleHex, iconHex, x, y, d) {
   slide.addImage({ data: await icon(IconComponent, iconHex), x: x + pad, y: y + pad, w: d - pad * 2, h: d - pad * 2 });
 }
 
-function footer(slide, n) {
+function footer(slide) {
   slide.addText("ArcGIS Maps SDK 5.0 · AI Components Demo", {
     x: 0.55, y: H - 0.42, w: 8, h: 0.3, fontFace: BODY, fontSize: 9, color: MUTED, align: "left", margin: 0
   });
-  slide.addText(String(n), {
+  slide.addText(String(pres.slides.length), {
     x: W - 1.0, y: H - 0.42, w: 0.5, h: 0.3, fontFace: BODY, fontSize: 9, color: MUTED, align: "right", margin: 0
   });
 }
@@ -121,10 +121,50 @@ function footer(slide, n) {
       { text: "the dashboard and the assistant read the same feature layer. The conversational interface comes ", options: { color: INK } },
       { text: "almost for free.", options: { bold: true, color: NAVY } },
     ], { x: 0.55, y: 5.7, w: 12.2, h: 0.7, fontFace: BODY, fontSize: 15, align: "center", margin: 0 });
-    footer(s, 2);
+    footer(s);
   }
 
-  // ============================================================ Slide 3 — Stack & why
+  // ============================================================ Slide 3 — The GIS side comes first
+  {
+    const s = pres.addSlide();
+    s.background = { color: WHITE };
+    s.addText("The GIS side comes first", {
+      x: 0.55, y: 0.45, w: 12, h: 0.7, fontFace: HEAD, fontSize: 30, color: NAVY, bold: true, margin: 0
+    });
+    s.addText("Answer quality comes from ArcGIS Online configuration, not app code. Do both — in order — before you touch the app.", {
+      x: 0.55, y: 1.18, w: 12.0, h: 0.6, fontFace: BODY, fontSize: 14, color: MUTED, margin: 0
+    });
+
+    // Step A — metadata
+    s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: 0.55, y: 1.95, w: 6.0, h: 3.5, fill: { color: LIGHT }, line: { type: "none" }, rectRadius: 0.1, shadow: shadow() });
+    await iconCircle(s, FaLayerGroup, TEAL, WHITE, 0.95, 2.3, 0.95);
+    s.addText("Step A — Populate metadata", { x: 2.05, y: 2.4, w: 4.3, h: 0.75, fontFace: BODY, fontSize: 16, bold: true, color: NAVY, valign: "middle", margin: 0 });
+    s.addText([
+      { text: "Layer: a meaningful name + a description of its purpose", options: { bullet: true, breakLine: true } },
+      { text: "Fields: descriptive aliases AND descriptions (the layer item's Data → Fields)", options: { bullet: true, breakLine: true } },
+      { text: "Agents reason over this — cryptic field names lead to wrong answers", options: { bullet: true } },
+    ], { x: 0.95, y: 3.4, w: 5.25, h: 2.0, fontFace: BODY, fontSize: 13, color: INK, lineSpacing: 18, paraSpaceAfter: 9, margin: 0 });
+
+    // Step B — embeddings
+    s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: 6.8, y: 1.95, w: 6.0, h: 3.5, fill: { color: LIGHT }, line: { color: TEAL, width: 1 }, rectRadius: 0.1, shadow: shadow() });
+    await iconCircle(s, FaProjectDiagram, AMBER, NAVY, 7.2, 2.3, 0.95);
+    s.addText("Step B — Generate embeddings", { x: 8.3, y: 2.4, w: 4.3, h: 0.75, fontFace: BODY, fontSize: 16, bold: true, color: NAVY, valign: "middle", margin: 0 });
+    s.addText([
+      { text: "Web map item → Settings → Manage AI vector embeddings → Generate", options: { bullet: true, breakLine: true } },
+      { text: "Builds a semantic index of layer titles + field metadata", options: { bullet: true, breakLine: true } },
+      { text: "Run it AFTER Step A; re-generate after any metadata/schema change", options: { bullet: true } },
+    ], { x: 7.2, y: 3.4, w: 5.25, h: 2.0, fontFace: BODY, fontSize: 13, color: INK, lineSpacing: 18, paraSpaceAfter: 9, margin: 0 });
+
+    // callout
+    s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: 0.55, y: 5.7, w: 12.25, h: 1.0, fill: { color: NAVY }, line: { type: "none" }, rectRadius: 0.08 });
+    s.addText([
+      { text: "Order matters: metadata first, then embed.  ", options: { bold: true, color: AMBER } },
+      { text: "The app is the easy 20% — this GIS prep is the 80% that decides answer quality.", options: { color: "C9D6E5" } },
+    ], { x: 0.95, y: 5.7, w: 11.5, h: 1.0, fontFace: BODY, fontSize: 14, valign: "middle", lineSpacing: 18, margin: 0 });
+    footer(s);
+  }
+
+  // ============================================================ Slide 4 — Stack & why
   {
     const s = pres.addSlide();
     s.background = { color: WHITE };
@@ -148,10 +188,10 @@ function footer(slide, n) {
       s.addText(r.d, { x: 6.2, y: y + 0.06, w: 6.45, h: 0.74, fontFace: BODY, fontSize: 12.5, color: MUTED, valign: "middle", lineSpacing: 15, margin: 0 });
       y += rowH;
     }
-    footer(s, 3);
+    footer(s);
   }
 
-  // ============================================================ Slide 4 — Phase 1 vs Phase 2
+  // ============================================================ Slide 5 — Phase 1 vs Phase 2
   {
     const s = pres.addSlide();
     s.background = { color: WHITE };
@@ -181,10 +221,10 @@ function footer(slide, n) {
       { text: "correct-direction cross-layer queries", options: { bullet: true, color: MUTED, breakLine: true } },
       { text: "ranking, what-if, exec summaries", options: { bullet: true, color: MUTED } },
     ], { x: 7.2, y: 3.0, w: 5.2, h: 3.2, fontFace: BODY, fontSize: 14, lineSpacing: 22, paraSpaceAfter: 8, margin: 0 });
-    footer(s, 4);
+    footer(s);
   }
 
-  // ============================================================ Slide 5 — Build in 10 steps
+  // ============================================================ Slide 6 — Build in 10 steps
   {
     const s = pres.addSlide();
     s.background = { color: WHITE };
@@ -217,10 +257,10 @@ function footer(slide, n) {
       s.addText(String(i + 1), { x, y: y + 0.04, w: 0.62, h: 0.62, fontFace: BODY, fontSize: 18, bold: true, color: WHITE, align: "center", valign: "middle", margin: 0 });
       s.addText(steps[i], { x: x + 0.78, y, w: colW - 0.85, h: 0.85, fontFace: BODY, fontSize: 12.5, color: INK, valign: "middle", lineSpacing: 15, margin: 0 });
     }
-    footer(s, 5);
+    footer(s);
   }
 
-  // ============================================================ Slide 6 — Gotchas
+  // ============================================================ Slide 7 — Gotchas
   {
     const s = pres.addSlide();
     s.background = { color: WHITE };
@@ -245,10 +285,10 @@ function footer(slide, n) {
       s.addText(cards[i].t, { x: x + 1.2, y: y + 0.3, w: cw - 1.4, h: 0.75, fontFace: BODY, fontSize: 14.5, bold: true, color: NAVY, valign: "middle", lineSpacing: 16, margin: 0 });
       s.addText(cards[i].d, { x: x + 0.28, y: y + 1.12, w: cw - 0.56, h: 1.1, fontFace: BODY, fontSize: 11.5, color: MUTED, lineSpacing: 14.5, margin: 0 });
     }
-    footer(s, 6);
+    footer(s);
   }
 
-  // ============================================================ Slide 7 — Prompt engineering
+  // ============================================================ Slide 8 — Prompt engineering
   {
     const s = pres.addSlide();
     s.background = { color: WHITE };
@@ -279,10 +319,10 @@ function footer(slide, n) {
       { text: "Broad sweeps  (vague, unscoped questions)", options: { bullet: true, breakLine: true } },
       { text: "Charts · forecasts · email · user location", options: { bullet: true } },
     ], { x: 7.2, y: 2.9, w: 5.4, h: 3.4, fontFace: BODY, fontSize: 13.5, color: INK, lineSpacing: 22, paraSpaceAfter: 12, margin: 0 });
-    footer(s, 7);
+    footer(s);
   }
 
-  // ============================================================ Slide 8 — Demo run sheet
+  // ============================================================ Slide 9 — Demo run sheet
   {
     const s = pres.addSlide();
     s.background = { color: WHITE };
@@ -308,10 +348,10 @@ function footer(slide, n) {
       s.addText(prompts[i].d, { x: 1.65, y: y + 0.55, w: 11.0, h: 0.42, fontFace: BODY, fontSize: 12.5, color: MUTED, margin: 0 });
       y += rh;
     }
-    footer(s, 8);
+    footer(s);
   }
 
-  // ============================================================ Slide 9 — Guidelines & next steps
+  // ============================================================ Slide 10 — Guidelines & next steps
   {
     const s = pres.addSlide();
     s.background = { color: NAVY };
