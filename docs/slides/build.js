@@ -302,7 +302,79 @@ function footer(slide) {
     footer(s);
   }
 
-  // ============================================================ Slide 8 — Gotchas
+  // ============================================================ Slide 8 — Two ways to ship it (code vs no-code)
+  {
+    const s = pres.addSlide();
+    s.background = { color: WHITE };
+    s.addText("Two ways to ship it: code vs no-code", {
+      x: 0.55, y: 0.45, w: 12.2, h: 0.7, fontFace: HEAD, fontSize: 30, color: NAVY, bold: true, margin: 0
+    });
+    s.addText("Same prepared web map, two front ends — the no-code path is for GIS users without developer skills.", {
+      x: 0.55, y: 1.18, w: 12.0, h: 0.6, fontFace: BODY, fontSize: 14, color: MUTED, margin: 0
+    });
+
+    // Code card (navy)
+    s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: 0.55, y: 1.95, w: 6.0, h: 3.2, fill: { color: NAVY }, line: { type: "none" }, rectRadius: 0.1, shadow: shadow() });
+    await iconCircle(s, FaCode, AMBER, NAVY, 0.95, 2.25, 0.9);
+    s.addText("Code — JavaScript SDK", { x: 1.95, y: 2.3, w: 4.4, h: 0.8, fontFace: BODY, fontSize: 15, bold: true, color: WHITE, valign: "middle", margin: 0 });
+    s.addText([
+      { text: "This repo: Vite + React + TypeScript", options: { bullet: true, breakLine: true } },
+      { text: "Custom UI, OAuth, your branding", options: { bullet: true, breakLine: true } },
+      { text: "Optional Phase 2 custom agent", options: { bullet: true } },
+    ], { x: 0.95, y: 3.3, w: 5.2, h: 1.7, fontFace: BODY, fontSize: 13, color: "C9D6E5", lineSpacing: 20, paraSpaceAfter: 8, margin: 0 });
+
+    // No-code card (light)
+    s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: 6.8, y: 1.95, w: 6.0, h: 3.2, fill: { color: LIGHT }, line: { color: TEAL, width: 1 }, rectRadius: 0.1, shadow: shadow() });
+    await iconCircle(s, FaComments, TEAL, WHITE, 7.2, 2.25, 0.9);
+    s.addText("No-code — Instant Apps Data Explorer", { x: 8.2, y: 2.25, w: 4.45, h: 0.9, fontFace: BODY, fontSize: 15, bold: true, color: NAVY, valign: "middle", margin: 0 });
+    s.addText([
+      { text: "Preset template, assistant wired in", options: { bullet: true, breakLine: true } },
+      { text: "Configure welcome message + sample questions", options: { bullet: true, breakLine: true } },
+      { text: "Publish & share from ArcGIS Online", options: { bullet: true } },
+    ], { x: 7.2, y: 3.3, w: 5.2, h: 1.7, fontFace: BODY, fontSize: 13, color: INK, lineSpacing: 20, paraSpaceAfter: 8, margin: 0 });
+
+    // callout
+    s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: 0.55, y: 5.4, w: 12.25, h: 1.0, fill: { color: NAVY }, line: { type: "none" }, rectRadius: 0.08 });
+    s.addText([
+      { text: "Both build on the same Activity #1 prep:  ", options: { bold: true, color: AMBER } },
+      { text: "field metadata → vector embeddings. Going no-code does not skip the GIS work.", options: { color: "C9D6E5" } },
+    ], { x: 0.95, y: 5.4, w: 11.5, h: 1.0, fontFace: BODY, fontSize: 13.5, valign: "middle", lineSpacing: 17, margin: 0 });
+    footer(s);
+  }
+
+  // ============================================================ Slide 9 — Set up Data Explorer (no code)
+  {
+    const s = pres.addSlide();
+    s.background = { color: WHITE };
+    s.addText("Set up Data Explorer (no code)", {
+      x: 0.55, y: 0.45, w: 9.5, h: 0.7, fontFace: HEAD, fontSize: 30, color: NAVY, bold: true, margin: 0
+    });
+    s.addText("doc.arcgis.com → Instant Apps", {
+      x: 9.5, y: 0.62, w: 3.3, h: 0.4, fontFace: BODY, fontSize: 12, italic: true, color: TEAL, align: "right", margin: 0
+    });
+    s.addText("From a prepared web map to a shared app — no developer tools.", {
+      x: 0.55, y: 1.18, w: 12.0, h: 0.5, fontFace: BODY, fontSize: 14, color: MUTED, margin: 0
+    });
+
+    const steps = [
+      "Prep the web map: field metadata → generate embeddings (item Settings, or in the app config)",
+      "Open ArcGIS Instant Apps from your web map",
+      "Choose the Data Explorer (beta) template",
+      "Configure: welcome message, up to 5 sample questions, a help panel",
+      "Preview (auto-saves); check tablet & mobile via the Views menu",
+      "Publish, then share (owner / organization / everyone) → Launch",
+    ];
+    const y0 = 1.75, rh = 0.82;
+    for (let i = 0; i < steps.length; i++) {
+      const y = y0 + i * rh;
+      s.addShape(pres.shapes.OVAL, { x: 0.6, y: y + 0.02, w: 0.58, h: 0.58, fill: { color: i % 2 ? TEAL : NAVY }, line: { type: "none" } });
+      s.addText(String(i + 1), { x: 0.6, y: y + 0.02, w: 0.58, h: 0.58, fontFace: BODY, fontSize: 17, bold: true, color: WHITE, align: "center", valign: "middle", margin: 0 });
+      s.addText(steps[i], { x: 1.4, y, w: 11.3, h: 0.66, fontFace: BODY, fontSize: 14, color: INK, valign: "middle", lineSpacing: 16, margin: 0 });
+    }
+    footer(s);
+  }
+
+  // ============================================================ Slide 10 — Gotchas
   {
     const s = pres.addSlide();
     s.background = { color: WHITE };
@@ -330,7 +402,7 @@ function footer(slide) {
     footer(s);
   }
 
-  // ============================================================ Slide 9 — Prompt engineering
+  // ============================================================ Slide 11 — Prompt engineering
   {
     const s = pres.addSlide();
     s.background = { color: WHITE };
@@ -364,7 +436,7 @@ function footer(slide) {
     footer(s);
   }
 
-  // ============================================================ Slide 10 — Demo run sheet
+  // ============================================================ Slide 12 — Demo run sheet
   {
     const s = pres.addSlide();
     s.background = { color: WHITE };
@@ -393,7 +465,7 @@ function footer(slide) {
     footer(s);
   }
 
-  // ============================================================ Slide 11 — Guidelines & next steps
+  // ============================================================ Slide 13 — Guidelines & next steps
   {
     const s = pres.addSlide();
     s.background = { color: NAVY };

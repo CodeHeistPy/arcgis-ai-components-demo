@@ -7,6 +7,10 @@ account** and a **SAML (organization-specific / "enterprise") login**.
 > All references in this document are to official Esri sources
 > (`developers.arcgis.com`, `doc.arcgis.com`). See [References](#references).
 
+> **Activity #2 also has a no-code path** for GIS users without developer
+> skills — the Instant Apps **Data Explorer** template. See
+> [`ACTIVITY-2-DATA-EXPLORER.md`](./ACTIVITY-2-DATA-EXPLORER.md).
+
 ---
 
 ## The one big idea

@@ -134,6 +134,7 @@ src/
 | `LESSONS-LEARNED.md` | Gotchas and guidelines (read before you start) |
 | `DEMO.md` | A run-sheet template for presenting it live |
 | `ACTIVITY-2-AUTH.md` | Connecting to your org — **SAML vs built-in** users |
+| `ACTIVITY-2-DATA-EXPLORER.md` | **No-code** path — the Instant Apps Data Explorer template for GIS users |
 | `CLAUDE.md` | Full project context + every known gotcha |
 | `docs/slides/` | A regenerable slide deck of the whole story |
 
