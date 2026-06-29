@@ -20,19 +20,40 @@ prep is the long pole — start it first (Step 0).
 None of the app code matters until these are true. They involve ArcGIS Online,
 not your editor, and the embeddings step in particular can fail and need retries.
 
-### 0a. A hosted feature layer + web map
+> **Devs, read this:** Steps 0a–0b are GIS-side configuration in ArcGIS Online,
+> not code — and they determine answer quality more than anything in the app.
+> The agent finds the right layer/field almost entirely from your **metadata**
+> and the **embeddings** built from it. Don't skip or rush them.
+
+### 0a. A hosted feature layer + web map, with good metadata
 You need a hosted feature service published to ArcGIS Online and a **web map**
 that contains it. The OOB agents discover layers *through the web map*, not from
 a direct service URL. Note the **web map item ID** — you'll need it.
 
-### 0b. Generate AI vector embeddings on the web map
-This is mandatory and easy to miss. Without it the assistant renders but greets
-you with *"Embeddings not found for this web map."*
+Then **populate metadata** — per Esri's
+[web map setup guide](https://developers.arcgis.com/javascript/latest/agentic-apps/ai-webmap-setup/),
+the agents reason over it:
 
-- Open the web map's **Item Details page in ArcGIS Online → Settings tab**.
-- Run the embeddings / "prepare for AI" flow there.
-- **Not** via AGO Assistant — that path is outdated.
-- Re-run whenever the layer schema changes.
+- **Layer:** a meaningful name and a description of the layer's purpose.
+- **Fields:** descriptive **aliases** *and* **field descriptions** for every
+  field users might ask about — set in the layer item's **Data → Fields** view
+  in ArcGIS Online. A raw `pct_cmplt` is opaque to the model; alias *"Percent
+  Complete"* + a one-line description is not. Esri's guidance: use *"layers with
+  good metadata for the best experience."*
+
+This is the highest-leverage step for answer quality, and it's pure GIS config.
+
+### 0b. Generate AI vector embeddings on the web map
+Mandatory, and easy to miss. The embeddings are a semantic index of your
+**layer titles and field metadata**, so the agent can pick the most relevant
+layer/field before calling the LLM. Without them the assistant renders but
+greets you with *"Embeddings not found for this web map."*
+
+- Open the **web map** item → **Settings** tab → **Manage AI vector
+  embeddings** → **Generate Embeddings**. (Not via AGO Assistant — outdated.)
+- **Do this AFTER 0a.** Embeddings capture metadata as it is at generation time,
+  so populate metadata first. **Re-generate whenever you change field metadata
+  or the schema** — otherwise the index is stale.
 
 > ⚠️ Embeddings can fail with a generic *"There was an error generating AI
 > vector embeddings"* that shows up in DevTools as a **CORS error** but is

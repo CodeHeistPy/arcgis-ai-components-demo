@@ -80,10 +80,18 @@ A Vite + React + TypeScript SPA that:
   `feature-info` agent in 5.0.x.)
 - **Custom agents require npm/bundler** (CDN cannot consume them) — so this is a
   Vite project from day one even though Phase 1 only uses OOB agents.
-- **Web map embeddings are required** for the OOB agents to route queries to the
-  right layer. Generate them on the web map's **Item Details → Settings** tab in
-  ArcGIS Online. If missing, the assistant renders but errors with "Embeddings
-  not found for this web map."
+- **Layer/field metadata + web map embeddings are required** — and they're the
+  biggest driver of answer quality. The agents reason over your metadata; per
+  Esri's web map setup guide, give layers meaningful names/descriptions and give
+  fields descriptive **aliases + descriptions** (ArcGIS Online → layer item →
+  **Data → Fields**). Then generate **AI vector embeddings** on the web map
+  (**Settings → Manage AI vector embeddings → Generate Embeddings**) — a semantic
+  index of layer titles + field metadata that lets the agent pick the right
+  layer/field before calling the LLM. **Order matters: populate metadata first,
+  then embed; re-generate after any metadata/schema change.** If embeddings are
+  missing, the assistant renders but errors with "Embeddings not found for this
+  web map." This is GIS-side config, not app code — see README "The GIS side
+  comes first" and WALKTHROUGH Step 0.
 
 ### End-user prerequisites
 
