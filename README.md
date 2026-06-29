@@ -63,7 +63,8 @@ layer/field before calling the LLM.
 ## Then make the app yours (3 steps)
 
 1. **Set env vars** — `cp .env.example .env.local` and fill in your OAuth client
-   ID and web map item ID (see `.env.example` for what each is).
+   ID and web map item ID (see `.env.example` for what each is, and
+   "Authentication & sign-in" below for how to get the Client ID).
 2. **Edit the scenario** — update `src/scenarios/scenario-01-sample/config.ts`
    (title/subtitle) and `prompts.ts` (entry message + suggested prompts) to fit
    your data.
@@ -78,6 +79,31 @@ layer/field before calling the LLM.
 - **Beta apps not blocked** in the org settings.
 - A **web map whose layers have good metadata, with embeddings generated** —
   see "The GIS side comes first" above.
+
+## Authentication & sign-in
+
+Two things to set up — both have dedicated, Esri-referenced guides:
+
+1. **Register the app to get a Client ID** *(developers).* Create an **OAuth
+   credentials** item in ArcGIS Online (**user** authentication), add
+   `http://localhost:5173` as a redirect URL, and copy the **Client ID** into
+   `.env.local` (`VITE_ARCGIS_OAUTH_APP_ID`). No client secret needed (PKCE).
+   Step-by-step: **[`DEV-OAUTH-CREDENTIALS.md`](./DEV-OAUTH-CREDENTIALS.md)**.
+
+2. **Choose how your users sign in — built-in vs SAML.** Both use the *same*
+   OAuth 2.0 flow and the *same* app code; the only lever is **`VITE_PORTAL_URL`**:
+   - `https://www.arcgis.com` — generic ArcGIS sign-in (works for both).
+   - `https://<your-org-key>.maps.arcgis.com` — targets your org and routes
+     **SAML** (organization-specific / "enterprise") members to your identity
+     provider.
+
+   Full walkthrough, comparison table, and troubleshooting:
+   **[`ACTIVITY-2-AUTH.md`](./ACTIVITY-2-AUTH.md)**.
+
+> **Prefer no code?** GIS users can get the same conversational experience with
+> the ArcGIS Instant Apps **Data Explorer** template — no credentials to
+> register, no app to host. It builds on the same metadata + embeddings prep.
+> See **[`ACTIVITY-2-DATA-EXPLORER.md`](./ACTIVITY-2-DATA-EXPLORER.md)**.
 
 ## Run
 
