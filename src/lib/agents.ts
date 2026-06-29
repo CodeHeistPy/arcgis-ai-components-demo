@@ -21,7 +21,7 @@
 export type OobAgent = "navigation" | "data-exploration" | "help";
 
 export interface ScenarioConfig {
-  /** Folder slug, e.g. "scenario-01-risk". Used for logging and routing. */
+  /** Folder slug, e.g. "scenario-01-sample". Used for logging and routing. */
   id: string;
 
   /** Title shown in <ScenarioHeader>. */
