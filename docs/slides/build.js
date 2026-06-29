@@ -260,7 +260,44 @@ function footer(slide) {
     footer(s);
   }
 
-  // ============================================================ Slide 7 — Connecting users (SAML vs built-in)
+  // ============================================================ Slide 7 — Register the app (OAuth credentials)
+  {
+    const s = pres.addSlide();
+    s.background = { color: WHITE };
+    s.addText("Register the app: OAuth credentials", {
+      x: 0.55, y: 0.45, w: 8.8, h: 0.7, fontFace: HEAD, fontSize: 30, color: NAVY, bold: true, margin: 0
+    });
+    s.addText("see DEV-OAUTH-CREDENTIALS.md", {
+      x: 9.4, y: 0.62, w: 3.4, h: 0.4, fontFace: BODY, fontSize: 12, italic: true, color: TEAL, align: "right", margin: 0
+    });
+    s.addText("The SDK app signs users in with a Client ID from ArcGIS Online — one-time, no code. (The no-code Data Explorer path skips this.)", {
+      x: 0.55, y: 1.18, w: 12.2, h: 0.5, fontFace: BODY, fontSize: 14, color: MUTED, margin: 0
+    });
+
+    const steps = [
+      "ArcGIS Online → Content → New item → Developer credentials → OAuth credentials (user auth)",
+      "Add a redirect URL: http://localhost:5173  (add your deployed origin later)",
+      "Copy the Client ID — no client secret needed (PKCE for single-page apps)",
+      "Set it in .env.local → VITE_ARCGIS_OAUTH_APP_ID",
+    ];
+    const y0 = 1.9, rh = 0.78;
+    for (let i = 0; i < steps.length; i++) {
+      const y = y0 + i * rh;
+      s.addShape(pres.shapes.OVAL, { x: 0.6, y: y + 0.02, w: 0.58, h: 0.58, fill: { color: i % 2 ? TEAL : NAVY }, line: { type: "none" } });
+      s.addText(String(i + 1), { x: 0.6, y: y + 0.02, w: 0.58, h: 0.58, fontFace: BODY, fontSize: 17, bold: true, color: WHITE, align: "center", valign: "middle", margin: 0 });
+      s.addText(steps[i], { x: 1.4, y, w: 11.3, h: 0.62, fontFace: BODY, fontSize: 13.5, color: INK, valign: "middle", lineSpacing: 16, margin: 0 });
+    }
+
+    // callout
+    s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: 0.55, y: 5.25, w: 12.25, h: 1.0, fill: { color: NAVY }, line: { type: "none" }, rectRadius: 0.08 });
+    s.addText([
+      { text: "Requires a Creator user type or higher.  ", options: { bold: true, color: AMBER } },
+      { text: "Use USER authentication, not app auth — the assistant's AI calls are gated on the signed-in user.", options: { color: "C9D6E5" } },
+    ], { x: 0.95, y: 5.25, w: 11.5, h: 1.0, fontFace: BODY, fontSize: 13.5, valign: "middle", lineSpacing: 17, margin: 0 });
+    footer(s);
+  }
+
+  // ============================================================ Slide 8 — Connecting users (SAML vs built-in)
   {
     const s = pres.addSlide();
     s.background = { color: WHITE };
@@ -302,7 +339,7 @@ function footer(slide) {
     footer(s);
   }
 
-  // ============================================================ Slide 8 — Two ways to ship it (code vs no-code)
+  // ============================================================ Slide 9 — Two ways to ship it (code vs no-code)
   {
     const s = pres.addSlide();
     s.background = { color: WHITE };
@@ -342,7 +379,7 @@ function footer(slide) {
     footer(s);
   }
 
-  // ============================================================ Slide 9 — Set up Data Explorer (no code)
+  // ============================================================ Slide 10 — Set up Data Explorer (no code)
   {
     const s = pres.addSlide();
     s.background = { color: WHITE };
@@ -374,7 +411,7 @@ function footer(slide) {
     footer(s);
   }
 
-  // ============================================================ Slide 10 — Gotchas
+  // ============================================================ Slide 11 — Gotchas
   {
     const s = pres.addSlide();
     s.background = { color: WHITE };
@@ -402,7 +439,7 @@ function footer(slide) {
     footer(s);
   }
 
-  // ============================================================ Slide 11 — Prompt engineering
+  // ============================================================ Slide 12 — Prompt engineering
   {
     const s = pres.addSlide();
     s.background = { color: WHITE };
@@ -436,7 +473,7 @@ function footer(slide) {
     footer(s);
   }
 
-  // ============================================================ Slide 12 — Demo run sheet
+  // ============================================================ Slide 13 — Demo run sheet
   {
     const s = pres.addSlide();
     s.background = { color: WHITE };
@@ -465,7 +502,7 @@ function footer(slide) {
     footer(s);
   }
 
-  // ============================================================ Slide 13 — Guidelines & next steps
+  // ============================================================ Slide 14 — Guidelines & next steps
   {
     const s = pres.addSlide();
     s.background = { color: NAVY };
