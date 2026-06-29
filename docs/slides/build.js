@@ -6,7 +6,7 @@ const {
   FaDatabase, FaCloud, FaMapMarkedAlt, FaRobot, FaComments, FaLayerGroup,
   FaCubes, FaKey, FaCheckCircle, FaTimesCircle, FaExclamationTriangle,
   FaBolt, FaSearchLocation, FaProjectDiagram, FaCog, FaListOl, FaCode,
-  FaFlagCheckered, FaBalanceScale, FaWater, FaArrowRight
+  FaFlagCheckered, FaBalanceScale, FaWater, FaArrowRight, FaUser, FaUserShield
 } = require("react-icons/fa");
 
 // ---- Palette (content-informed: navy=enterprise/exec, teal=geospatial, amber=risk) ----
@@ -260,7 +260,49 @@ function footer(slide) {
     footer(s);
   }
 
-  // ============================================================ Slide 7 — Gotchas
+  // ============================================================ Slide 7 — Connecting users (SAML vs built-in)
+  {
+    const s = pres.addSlide();
+    s.background = { color: WHITE };
+    s.addText("Connecting users: SAML vs built-in", {
+      x: 0.55, y: 0.45, w: 12.2, h: 0.7, fontFace: HEAD, fontSize: 30, color: NAVY, bold: true, margin: 0
+    });
+    s.addText("Both use the same OAuth 2.0 user-auth flow and the same app code — the only lever is the portal URL.", {
+      x: 0.55, y: 1.18, w: 12.0, h: 0.6, fontFace: BODY, fontSize: 14, color: MUTED, margin: 0
+    });
+
+    // Built-in card
+    s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: 0.55, y: 1.95, w: 6.0, h: 3.4, fill: { color: LIGHT }, line: { type: "none" }, rectRadius: 0.1, shadow: shadow() });
+    await iconCircle(s, FaUser, TEAL, WHITE, 0.95, 2.25, 0.9);
+    s.addText("Built-in account", { x: 1.95, y: 2.3, w: 4.4, h: 0.8, fontFace: BODY, fontSize: 16, bold: true, color: NAVY, valign: "middle", margin: 0 });
+    s.addText([
+      { text: "Credentials live in ArcGIS Online", options: { bullet: true, breakLine: true } },
+      { text: "Signs in directly on the ArcGIS sign-in page", options: { bullet: true, breakLine: true } },
+      { text: "Org password policy applies", options: { bullet: true, breakLine: true } },
+      { text: "Username, e.g. jsmith", options: { bullet: true } },
+    ], { x: 0.95, y: 3.25, w: 5.25, h: 2.0, fontFace: BODY, fontSize: 12.5, color: INK, lineSpacing: 18, paraSpaceAfter: 8, margin: 0 });
+
+    // SAML card
+    s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: 6.8, y: 1.95, w: 6.0, h: 3.4, fill: { color: LIGHT }, line: { color: TEAL, width: 1 }, rectRadius: 0.1, shadow: shadow() });
+    await iconCircle(s, FaUserShield, AMBER, NAVY, 7.2, 2.25, 0.9);
+    s.addText("SAML / org-specific login", { x: 8.2, y: 2.3, w: 4.45, h: 0.8, fontFace: BODY, fontSize: 16, bold: true, color: NAVY, valign: "middle", margin: 0 });
+    s.addText([
+      { text: "Credentials live in your identity provider (IdP)", options: { bullet: true, breakLine: true } },
+      { text: "Redirected to your IdP to sign in", options: { bullet: true, breakLine: true } },
+      { text: "Formerly called \"enterprise logins\"", options: { bullet: true, breakLine: true } },
+      { text: "Username carries the org-key suffix: jsmith@ORG", options: { bullet: true } },
+    ], { x: 7.2, y: 3.25, w: 5.25, h: 2.0, fontFace: BODY, fontSize: 12.5, color: INK, lineSpacing: 18, paraSpaceAfter: 8, margin: 0 });
+
+    // callout
+    s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: 0.55, y: 5.6, w: 12.25, h: 1.05, fill: { color: NAVY }, line: { type: "none" }, rectRadius: 0.08 });
+    s.addText([
+      { text: "The only lever is VITE_PORTAL_URL:  ", options: { bold: true, color: AMBER } },
+      { text: "www.arcgis.com (generic sign-in)  vs  https://<org-key>.maps.arcgis.com (targets your org → routes SAML members to your IdP).", options: { color: "C9D6E5" } },
+    ], { x: 0.95, y: 5.6, w: 11.5, h: 1.05, fontFace: BODY, fontSize: 13, valign: "middle", lineSpacing: 17, margin: 0 });
+    footer(s);
+  }
+
+  // ============================================================ Slide 8 — Gotchas
   {
     const s = pres.addSlide();
     s.background = { color: WHITE };
@@ -288,7 +330,7 @@ function footer(slide) {
     footer(s);
   }
 
-  // ============================================================ Slide 8 — Prompt engineering
+  // ============================================================ Slide 9 — Prompt engineering
   {
     const s = pres.addSlide();
     s.background = { color: WHITE };
@@ -322,7 +364,7 @@ function footer(slide) {
     footer(s);
   }
 
-  // ============================================================ Slide 9 — Demo run sheet
+  // ============================================================ Slide 10 — Demo run sheet
   {
     const s = pres.addSlide();
     s.background = { color: WHITE };
@@ -351,7 +393,7 @@ function footer(slide) {
     footer(s);
   }
 
-  // ============================================================ Slide 10 — Guidelines & next steps
+  // ============================================================ Slide 11 — Guidelines & next steps
   {
     const s = pres.addSlide();
     s.background = { color: NAVY };
