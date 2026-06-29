@@ -1,0 +1,39 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+dist-ssr/
+
+# Local env (never commit OAuth IDs even though they're public-ish — keeps the
+# repo portable across orgs)
+.env
+.env.local
+.env.*.local
+
+# Editor / OS
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+Thumbs.db
+*.swp
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# TypeScript build info
+*.tsbuildinfo
+.tsbuild-node/
+
+# Slide-deck QA render output (regenerated on demand)
+docs/slides/render/
+docs/slides/*.pdf
+
+# Private: real internal values, session notes, pre-genericization snapshots
+# (never commit). The *.local.md convention keeps any local-only note ignored.
+*.local.md
+.private/
