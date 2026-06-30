@@ -73,8 +73,8 @@ layer/field before calling the LLM.
 ## Prerequisites (for you and your demo audience)
 
 - A signed-in **named user** of an ArcGIS Online org (no trial, no public/anon).
-- An **OAuth 2.0 Developer credentials** item (user auth) with
-  `http://localhost:5173` as a redirect URI.
+- An **OAuth credentials** item (user authentication) with
+  `http://localhost:5173` as a redirect URI — see "Authentication & sign-in".
 - **AI assistants enabled** in the org settings.
 - **Beta apps not blocked** in the org settings.
 - A **web map whose layers have good metadata, with embeddings generated** —

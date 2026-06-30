@@ -72,7 +72,7 @@ public/anonymous map in incognito will render but silently fail at the LLM call.
 
 ### Redirect URI must match exactly
 `http://localhost:5173` (http, not https; matching Vite's port) must be
-registered on the Developer credentials item, or sign-in returns a redirect
+registered on the OAuth credentials item, or sign-in returns a redirect
 mismatch.
 
 ---

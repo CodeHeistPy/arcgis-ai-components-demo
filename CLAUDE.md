@@ -236,8 +236,9 @@ VITE_WEBMAP_ID=<your web map item id>
 VITE_FEATURE_SERVICE_URL=<direct service URL — Phase 2 only>
 ```
 
-The OAuth client ID comes from an ArcGIS Online **Developer credentials** item
-(OAuth 2.0 **user** auth). Redirect URI for local dev: `http://localhost:5173`.
+The OAuth client ID comes from an ArcGIS Online **OAuth credentials** item
+(Content → New item → Developer credentials → OAuth credentials; **user** auth).
+Redirect URI for local dev: `http://localhost:5173`.
 You need only the Client ID — no secret (PKCE).
 
 **Built-in vs SAML users:** both use the same OAuth 2.0 user-auth flow and the
