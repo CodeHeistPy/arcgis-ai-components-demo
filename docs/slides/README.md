@@ -13,11 +13,13 @@ npm install                 # pptxgenjs, react-icons, react, react-dom, sharp, j
 node build.js               # writes the .pptx
 ```
 
-The deck is 14 slides: title · concept/architecture · **the GIS side comes
-first (metadata + embeddings)** · stack · Phase 1 vs 2 · 10-step build ·
-**register the app (OAuth credentials)** · **connecting users (SAML vs
-built-in)** · **code vs no-code** · **set up Data Explorer (no-code)** · gotchas
-· prompt do/don't · demo run sheet · guidelines.
+The deck is a lean **9 slides** focused on getting started + the upfront setup,
+deferring detail to the repo's docs: title · concept/architecture · the GIS side
+comes first (metadata + embeddings) · **get started with the repo** · register
+the app (OAuth credentials) · connecting users (SAML vs built-in) · code vs
+no-code · set up Data Explorer (no-code) · **the repo handles the rest** (docs
+map). Deeper material (stack, phases, build steps, gotchas, prompt patterns,
+demo run sheet) lives in the repo docs, not the deck.
 
 Footers auto-number from `pres.slides.length`, so inserting/reordering slides
 needs no manual page-number changes.
