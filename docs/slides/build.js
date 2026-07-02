@@ -180,7 +180,7 @@ function footer(slide) {
     const steps = [
       "Clone:  git clone https://github.com/CodeHeistPy/arcgis-ai-components-demo.git",
       "Install:  npm install",
-      "Configure:  cp .env.example .env.local  →  set VITE_ARCGIS_OAUTH_APP_ID + VITE_WEBMAP_ID",
+      "Configure:  cp .env.example .env.local  →  set VITE_ARCGIS_OAUTH_APP_ID, VITE_WEBMAP_ID, VITE_PORTAL_URL (org URL for SAML)",
       "Run:  npm run dev  →  http://localhost:5173, then sign in",
       "Make it yours:  edit src/scenarios/scenario-01-sample (config.ts + prompts.ts)",
     ];
