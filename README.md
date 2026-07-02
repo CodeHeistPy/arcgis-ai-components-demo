@@ -177,6 +177,23 @@ src/
 | `CLAUDE.md` | Full project context + every known gotcha |
 | `docs/slides/` | A regenerable slide deck of the whole story |
 
+## Building with an AI coding assistant
+
+You don't need to be a JavaScript developer — this repo is set up so an AI
+coding assistant can help you build and extend the app with repo-aware context:
+
+- **GitHub Copilot in Visual Studio / VS Code** reads
+  [`.github/copilot-instructions.md`](./.github/copilot-instructions.md). In
+  Visual Studio, enable it once under **Tools → Options → GitHub → Copilot →
+  "Enable custom instructions … from .github/copilot-instructions.md"** (when
+  Copilot uses it, the file shows in the response's References list).
+- **Claude-based tools** read [`CLAUDE.md`](./CLAUDE.md).
+
+Both files steer the assistant away from the easy mistakes (e.g., the
+non-existent `@arcgis/ai-components-react` package, missing
+`defineCustomElements()`), so its suggestions match this SDK. Ask it things like
+*"add a suggested prompt about &lt;topic&gt;"* or *"explain what ScenarioShell does."*
+
 ## Troubleshooting
 
 | Symptom | Likely cause |
