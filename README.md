@@ -72,9 +72,9 @@ layer/field before calling the LLM.
 
 ## Prerequisites (for you and your demo audience)
 
-- **Node.js 18 or newer** and npm installed (check with `node -v`). Any editor
-  works — run the commands below in a terminal (in VS Code: **Terminal → New
-  Terminal**; in Visual Studio: **View → Terminal**).
+- **Node.js 18 or newer** and npm installed (check with `node -v`). You'll run
+  the commands in a terminal — **Visual Studio users, see the note under _Run_
+  below** for opening the folder and terminal.
 - A signed-in **named user** of an ArcGIS Online org (no trial, no public/anon).
 - An **OAuth credentials** item (user authentication) with
   `http://localhost:5173` as a redirect URI — see "Authentication & sign-in".
@@ -119,6 +119,13 @@ npm run dev                     # → http://localhost:5173
 ```
 
 Sign in as a named user, then try the suggested prompts.
+
+> **Using Visual Studio?** Open the cloned repo with **File → Open → Folder…**
+> — it's a folder-based Vite project, so there's no `.sln`/project to open.
+> Then open **View → Terminal** and run the three commands above there.
+> **Check `node -v` in that terminal reads 18 or newer** — Visual Studio may
+> ship an older bundled Node; if so, install Node 18+ and reopen the folder.
+> Leave `npm run dev` running and open <http://localhost:5173> in your browser.
 
 ## Writing good prompts
 

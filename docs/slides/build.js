@@ -174,8 +174,8 @@ function footer(slide) {
     s.addText("see README.md", {
       x: 9.5, y: 0.62, w: 3.3, h: 0.4, fontFace: BODY, fontSize: 12, italic: true, color: TEAL, align: "right", margin: 0
     });
-    s.addText("Clone, configure, run — the repo carries the detail.", {
-      x: 0.55, y: 1.18, w: 12.0, h: 0.5, fontFace: BODY, fontSize: 14, color: MUTED, margin: 0
+    s.addText("Clone, configure, run.  In Visual Studio: File → Open → Folder, then View → Terminal to run the commands.", {
+      x: 0.55, y: 1.18, w: 12.2, h: 0.5, fontFace: BODY, fontSize: 14, color: MUTED, margin: 0
     });
     const steps = [
       "Clone:  git clone https://github.com/CodeHeistPy/arcgis-ai-components-demo.git",
