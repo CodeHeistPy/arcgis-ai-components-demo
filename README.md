@@ -176,6 +176,7 @@ src/
 | `DEV-OAUTH-CREDENTIALS.md` | Dev setup — register the app & create OAuth credentials in ArcGIS Online |
 | `CLAUDE.md` | Full project context + every known gotcha |
 | `docs/slides/` | A regenerable slide deck of the whole story |
+| `WORKSHOP-CHECKLIST.md` | Facilitator pre-flight checklist for running this as a workshop |
 
 ## Building with an AI coding assistant
 
