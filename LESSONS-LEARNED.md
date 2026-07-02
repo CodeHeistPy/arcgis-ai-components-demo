@@ -144,6 +144,14 @@ the filter against the big layer) isn't chosen automatically. Mitigations:
    service and answer as a plain attribute query. Production pattern.
 3. **Phase 2 custom agent** that submits the query in the right direction.
 
+**Watch for the silent false negative.** The same cross-layer problem can return
+a clean *"no features returned"* instead of a 413 — e.g. "find projects within 10
+miles of \<national flood layer\>" returned "none" even though a project was
+confirmed *inside* a flood zone. No error, just a wrong empty answer — worse than
+the 413 in a demo. Treat empty cross-layer results as suspect; verify with a
+scoped/attribute query. And **don't trust the assistant's auto-suggested example
+queries** — it proposes cross-layer prompts (like that one) it can't answer.
+
 ### Cross-category comparison silently degrades
 Single-group aggregates work ("average &lt;metric&gt; for &lt;one group&gt;"). Asking
 it to **compare** two groups in one turn collapses to one overall number. This is

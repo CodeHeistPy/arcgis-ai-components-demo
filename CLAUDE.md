@@ -326,6 +326,19 @@ SDK 5.0). `@arcgis/ai-components` pulls in `@langchain/langgraph ^1.1.2`,
     service and answer as a plain attribute query. Production pattern.
   - **Phase 2 custom agent** that submits the small record set as the filter
     against the reference layer.
+  - **The same failure can surface as a SILENT FALSE NEGATIVE, not a 413.**
+    Confirmed 2026-05: "Find projects within 10 miles of United States Flood
+    Hazard Areas" returned a clean *"No project features … were returned"* — but
+    that's **wrong** (a state-scoped query the same session confirmed PRJ-002 is
+    *inside* an SFHA, so it's trivially within 10 mi). This is more dangerous
+    than the 413: no error, just a confident empty result an exec reads as "none
+    of our projects are near flood zones." Treat empty cross-layer results
+    against large national layers as **suspect, not authoritative** — verify with
+    a state-scoped or attribute query.
+  - **Don't trust the assistant's AUTO-SUGGESTED example queries.** The failing
+    "within 10 miles" prompt above was one the assistant itself proposed. It
+    generates plausible cross-layer example prompts it can't reliably answer.
+    Curate your own `suggestedPrompts`; verify any suggestion before demoing.
 - **The OOB agent hallucinates schema/metadata on introspection prompts — but
   data queries are reliable.** A sharp, demo-critical distinction:
   - **Schema/metadata introspection ("list fields", "what can I ask?") =
