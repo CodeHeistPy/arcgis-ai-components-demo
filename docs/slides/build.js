@@ -370,19 +370,23 @@ function footer(slide) {
       { text: "DEV-OAUTH-CREDENTIALS.md", options: { bold: true, color: AMBER } },
       { text: "  — register the app / Client ID", options: { color: "C9D6E5", breakLine: true } },
       { text: "ACTIVITY-2-AUTH.md", options: { bold: true, color: AMBER } },
-      { text: "  — SAML vs built-in sign-in", options: { color: "C9D6E5" } },
-    ], { x: 0.9, y: 2.6, w: 6.0, h: 3.3, fontFace: BODY, fontSize: 13.5, lineSpacing: 18, paraSpaceAfter: 12, margin: 0 });
-    s.addText([
+      { text: "  — SAML vs built-in sign-in", options: { color: "C9D6E5", breakLine: true } },
       { text: "ACTIVITY-2-DATA-EXPLORER.md", options: { bold: true, color: AMBER } },
-      { text: "  — no-code path", options: { color: "C9D6E5", breakLine: true } },
+      { text: "  — no-code path", options: { color: "C9D6E5" } },
+    ], { x: 0.9, y: 2.45, w: 6.0, h: 3.7, fontFace: BODY, fontSize: 13.5, lineSpacing: 18, paraSpaceAfter: 10, margin: 0 });
+    s.addText([
+      { text: ".github/copilot-instructions.md", options: { bold: true, color: AMBER } },
+      { text: "  — repo context for Copilot (VS)", options: { color: "C9D6E5", breakLine: true } },
       { text: "LESSONS-LEARNED.md", options: { bold: true, color: AMBER } },
       { text: "  — gotchas + guidelines", options: { color: "C9D6E5", breakLine: true } },
       { text: "DEMO.md", options: { bold: true, color: AMBER } },
       { text: "  — run-sheet for presenting", options: { color: "C9D6E5", breakLine: true } },
+      { text: "WORKSHOP-CHECKLIST.md", options: { bold: true, color: AMBER } },
+      { text: "  — facilitator pre-flight", options: { color: "C9D6E5", breakLine: true } },
       { text: "CLAUDE.md", options: { bold: true, color: AMBER } },
       { text: "  — full project context + gotchas", options: { color: "C9D6E5" } },
-    ], { x: 7.1, y: 2.6, w: 5.7, h: 3.3, fontFace: BODY, fontSize: 13.5, lineSpacing: 18, paraSpaceAfter: 12, margin: 0 });
-    s.addText("Start at the README — it links everything else.", {
+    ], { x: 7.1, y: 2.45, w: 5.7, h: 3.7, fontFace: BODY, fontSize: 13.5, lineSpacing: 18, paraSpaceAfter: 10, margin: 0 });
+    s.addText("Clone it and let your AI coding assistant help you build — the instruction files keep its suggestions on-SDK.", {
       x: 0.9, y: 6.35, w: 11.8, h: 0.5, fontFace: BODY, fontSize: 13, italic: true, color: TEALLT, margin: 0
     });
   }
