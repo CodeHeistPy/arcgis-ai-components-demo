@@ -39,14 +39,16 @@ can be any named member with access to the web map; see `ACTIVITY-2-AUTH.md`.)
 2. Go to **Content → My Content → New item**, and select **Developer
    credentials**. *(Esri: "Click Content > My content > New item and select
    Developer credentials.")*
-3. If prompted to choose a credential type, select **OAuth credentials** (OAuth
-   2.0). Choose the **user authentication** flow.
+3. On **Select credential type**, choose **OAuth 2.0 credentials — For user
+   authentication** (the left option). *Not* app authentication, *not* API key —
+   user auth is what gates the assistant's AI calls on the signed-in user.
+   Click **Next**.
 4. **Add a redirect URL.** A redirect URL is **required** for user
    authentication — it's where ArcGIS sends the user back after they sign in.
    For this app:
-   - **Local dev:** add **`http://localhost:5173`** — and, to be safe, also add
-     **`http://localhost:5173/`** (with trailing slash). Registering both avoids
-     a redirect-mismatch error from a slash difference.
+   - **Local dev:** add **`http://localhost:5173`** — and, to be safe, click
+     **+ Add** and also enter **`http://localhost:5173/`** (with trailing slash).
+     Registering both avoids a redirect-mismatch error from a slash difference.
    - The dev server is pinned to port **5173** (`vite.config.ts` sets
      `strictPort: true`), so the redirect URL is stable. If you see "port in
      use," free port 5173 rather than letting it change — a different port won't
@@ -54,10 +56,14 @@ can be any named member with access to the web map; see `ACTIVITY-2-AUTH.md`.)
    - **Deployed app:** add your site's origin too, e.g.
      `https://your-app.example.com`.
    - The value must **match exactly** (scheme, host, port).
-5. **Create** the item, then open its page and **copy the Client ID** (this is
-   the `client_id` / "App ID"). You do **not** need the client secret for a
-   browser app.
-6. **Put the Client ID in the app:** in `.env.local`, set
+5. **Application environment:** choose **Browser** — this is a client-side
+   single-page app. (*Multiple* also works; per the dialog this setting only
+   affects when the item shows up in filtered search results, not sign-in.) The
+   optional **URL** field can be left blank. Click **Next**.
+6. **Create** the item (give it a title/tags), then open its page and **copy the
+   Client ID** (this is the `client_id` / "App ID"). You do **not** need the
+   client secret for a browser app.
+7. **Put the Client ID in the app:** in `.env.local`, set
    `VITE_ARCGIS_OAUTH_APP_ID=<your client id>`. (`lib/arcgis.ts` passes it to
    `OAuthInfo`; see `WALKTHROUGH.md` Step 3 and `CLAUDE.md` §8.)
 
