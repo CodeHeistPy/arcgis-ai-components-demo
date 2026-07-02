@@ -72,6 +72,9 @@ layer/field before calling the LLM.
 
 ## Prerequisites (for you and your demo audience)
 
+- **Node.js 18 or newer** and npm installed (check with `node -v`). Any editor
+  works — run the commands below in a terminal (in VS Code: **Terminal → New
+  Terminal**; in Visual Studio: **View → Terminal**).
 - A signed-in **named user** of an ArcGIS Online org (no trial, no public/anon).
 - An **OAuth credentials** item (user authentication) with
   `http://localhost:5173` as a redirect URI — see "Authentication & sign-in".
@@ -92,10 +95,12 @@ Two things to set up — both have dedicated, Esri-referenced guides:
 
 2. **Choose how your users sign in — built-in vs SAML.** Both use the *same*
    OAuth 2.0 flow and the *same* app code; the only lever is **`VITE_PORTAL_URL`**:
-   - `https://www.arcgis.com` — generic ArcGIS sign-in (works for both).
-   - `https://<your-org-key>.maps.arcgis.com` — targets your org and routes
-     **SAML** (organization-specific / "enterprise") members to your identity
-     provider.
+   - **Most orgs use SAML / enterprise logins → set `VITE_PORTAL_URL` to your
+     org URL** `https://<your-org-key>.maps.arcgis.com`. This routes members
+     straight to your identity provider. (Find `<your-org-key>` in ArcGIS
+     Online → Organization → Settings → General.)
+   - `https://www.arcgis.com` — generic ArcGIS sign-in; fine for **built-in**
+     accounts (SAML users would have to pick their org first).
 
    Full walkthrough, comparison table, and troubleshooting:
    **[`ACTIVITY-2-AUTH.md`](./ACTIVITY-2-AUTH.md)**.

@@ -44,12 +44,16 @@ can be any named member with access to the web map; see `ACTIVITY-2-AUTH.md`.)
 4. **Add a redirect URL.** A redirect URL is **required** for user
    authentication — it's where ArcGIS sends the user back after they sign in.
    For this app:
-   - **Local dev:** `http://localhost:5173` (matches Vite's port in
-     `vite.config.ts`).
+   - **Local dev:** add **`http://localhost:5173`** — and, to be safe, also add
+     **`http://localhost:5173/`** (with trailing slash). Registering both avoids
+     a redirect-mismatch error from a slash difference.
+   - The dev server is pinned to port **5173** (`vite.config.ts` sets
+     `strictPort: true`), so the redirect URL is stable. If you see "port in
+     use," free port 5173 rather than letting it change — a different port won't
+     match the registered redirect.
    - **Deployed app:** add your site's origin too, e.g.
      `https://your-app.example.com`.
-   - The value must **match exactly** (scheme, host, port). Add more than one if
-     you run on multiple origins.
+   - The value must **match exactly** (scheme, host, port).
 5. **Create** the item, then open its page and **copy the Client ID** (this is
    the `client_id` / "App ID"). You do **not** need the client secret for a
    browser app.

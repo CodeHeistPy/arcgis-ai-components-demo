@@ -4,6 +4,9 @@
   "version": "0.1.0",
   "type": "module",
   "description": "Template app for the AI components (beta) in the ArcGIS Maps SDK for JavaScript 5.0 — an <arcgis-assistant> chat panel over a web map with the OOB navigation, data-exploration, and help agents.",
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
