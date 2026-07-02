@@ -173,6 +173,9 @@ prompt returns correct, self-consistent data against your layer before shipping.
   to one overall number (no GROUP BY in one turn).
 - Schema introspection ("list fields", "what can I ask?") — **hallucinates**
   (see §9). Never demo. Verify schema via AGO **Data → Fields**.
+- Directions / routing ("build directions between features") — out of scope
+  (routing = Network Analysis, not an OOB agent). The agent declines correctly
+  but then offers workarounds it can't execute — see §9.
 - Forecasts, chart generation, external integrations, user location — not
   supported.
 
@@ -354,6 +357,15 @@ SDK 5.0). `@arcgis/ai-components` pulls in `@langchain/langgraph ^1.1.2`,
     authoritative schema from AGO **Data → Fields** or the token-authenticated
     REST endpoint — never the assistant. (4) Sanity-check a returned scalar by
     forcing a decomposition that must reconcile (itemized list + total).
+- **The agent declines routing/directions correctly — then offers workarounds it
+  can't execute.** Confirmed 2026-05: asked to "build directions between
+  features," it correctly says it can't do turn-by-turn routing (that's Network
+  Analysis, not an OOB capability) — good — but then lists options like "export
+  features to CSV/GeoJSON," "call an external routing API," or "produce a polyline
+  file," **none of which the OOB agent can actually do.** It's confident overreach
+  (cousin of the schema hallucination): helpful-sounding offers with no real
+  capability behind them. Don't act on them in a demo; treat routing as
+  out-of-scope (Network Analysis / Directions widget / a Phase 2 custom tool).
 - **Custom agents cannot run from CDN.** Stay on Vite/npm.
 - **OAuth scopes matter.** Use **user** auth; the credentials item needs scopes
   the signed-in org permits for AI calls. Immediate first-prompt errors usually

@@ -50,4 +50,7 @@ export const OUT_OF_SCOPE_PROMPTS: readonly string[] = [
   "Plot <metric> over time on a chart.",
   "Find the nearest <record> to me.",
   "Email the <record> list to my team.",
+  // Directions/routing is out of scope (that's Network Analysis). The agent
+  // declines but then offers workarounds it can't execute (CLAUDE.md §9).
+  "Build directions between features.",
 ];
