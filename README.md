@@ -17,6 +17,9 @@ Your data  ──►  ArcGIS Online feature layer  ──►  Web map (+ embeddi
 > portfolio-style reasoning the OOB agents can't do) is scoped in `CLAUDE.md`
 > §6 but not implemented in the template.
 
+> 👋 **Doing this as a workshop?** Follow **[`WORKSHOP-GUIDE.md`](./WORKSHOP-GUIDE.md)** —
+> a step-by-step, self-paced guide with a checkpoint after every step.
+
 ## The GIS side comes first (and it's most of the work)
 
 **Read this even if you're a developer, not a GIS analyst.** The AI components
@@ -176,6 +179,7 @@ src/
 | `DEV-OAUTH-CREDENTIALS.md` | Dev setup — register the app & create OAuth credentials in ArcGIS Online |
 | `CLAUDE.md` | Full project context + every known gotcha |
 | `docs/slides/` | A regenerable slide deck of the whole story |
+| `WORKSHOP-GUIDE.md` | **Follow-along, step-by-step attendee guide** (checkpoints per step) |
 | `WORKSHOP-CHECKLIST.md` | Facilitator pre-flight checklist for running this as a workshop |
 
 ## Building with an AI coding assistant
