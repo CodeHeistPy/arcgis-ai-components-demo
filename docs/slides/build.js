@@ -365,6 +365,8 @@ function footer(slide) {
     s.addText([
       { text: "README.md", options: { bold: true, color: AMBER } },
       { text: "  — start here: setup + GIS-side-first", options: { color: "C9D6E5", breakLine: true } },
+      { text: "WORKSHOP-GUIDE.md", options: { bold: true, color: AMBER } },
+      { text: "  — step-by-step attendee guide", options: { color: "C9D6E5", breakLine: true } },
       { text: "WALKTHROUGH.md", options: { bold: true, color: AMBER } },
       { text: "  — full build from scratch", options: { color: "C9D6E5", breakLine: true } },
       { text: "DEV-OAUTH-CREDENTIALS.md", options: { bold: true, color: AMBER } },
