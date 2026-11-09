@@ -59,6 +59,22 @@ to your strongest hook — keep that arc.
 - Pointed single-subject form — the most reliable shape. Good for the
   "traceable to source data, not hand-waving" beat if someone gets skeptical.
 
+## Live-feed beat (optional visual)
+
+Open the **Layer List** and toggle on a real-time hazard feed (NWS watches &
+warnings, USGS earthquakes, wildfire perimeters, NOAA river gauges).
+
+- **Say:** _"Beyond your own data, we can drop live conditions over the same map
+  — here's active severe weather / current fires sitting right on top of the
+  portfolio."_
+- **Honesty note (for you, not the room):** these live feeds are **visual
+  context** — the assistant can't answer questions about them until the layer is
+  on the web map and re-embedded (`CLAUDE.md` §3/§9). Don't ask the assistant
+  about them live unless you've done that step.
+- **Premium upgrade line:** _"The same pattern drops in commercial-grade weather
+  — Baron radar, flash-flood risk, road weather — now purchasable through Esri."_
+  (Env-gated in `src/lib/baron.ts`; only wire it if the customer has Baron.)
+
 ---
 
 ## Rules for driving it live

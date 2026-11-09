@@ -89,6 +89,15 @@ export async function signIn(): Promise<void> {
   });
 }
 
+/**
+ * Synchronously return the signed-in user's id, if a credential exists.
+ * Used by the header to show the account chip. Returns null when not signed in.
+ */
+export function getSignedInUsername(): string | null {
+  const credential = IdentityManager.findCredential(`${PORTAL_URL}/sharing`);
+  return credential?.userId ?? null;
+}
+
 export async function signOut(): Promise<void> {
   IdentityManager.destroyCredentials();
   // Force a reload so the assistant and map components fully tear down.

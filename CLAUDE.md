@@ -300,6 +300,23 @@ SDK 5.0). `@arcgis/ai-components` pulls in `@langchain/langgraph ^1.1.2`,
   Details → Settings** tab → generate embeddings. (Older docs point at AGO
   Assistant — outdated.) One-time per web map; re-run if the schema changes. See
   <https://developers.arcgis.com/javascript/latest/agentic-apps/ai-webmap-setup/#embeddings>.
+- **Client-side feature layers added to the assistant's map BEFORE it
+  initializes break startup with "Layer count mismatch during registry
+  restoration. Regenerate embeddings."** The orchestrator runs a one-time check
+  at init that the number of **feature** layers in the referenced map equals the
+  web map's embeddings-registry count. Any `FeatureLayer` your app adds at
+  runtime (e.g. live-feed operational layers) counts on the map side but is NOT
+  in the embeddings, so adding it before init inflates the count and the
+  assistant refuses to start. **Regenerating embeddings does NOT fix it** — the
+  client layers aren't in the web map, so the registry can never match. Confirmed
+  2026-11 (adding 4 live feeds → map shows 6 feature layers vs registry 2).
+  Diagnostics: `document.querySelector('arcgis-map').map.allLayers.items.filter(l=>l.type==='feature').length`
+  must equal the embedded-layer count. Tile / vector-tile / map-image layers are
+  NOT counted (only feature layers), so basemap reference layers are harmless.
+  **Fix:** add such layers AFTER the assistant's **`arcgisReady`** event — it
+  fires only on a successful init, and the re-init watcher keys on `[view,
+  agents]`, not map layers, so the startup check never re-runs. See
+  `ScenarioShell.tsx` (verified against @arcgis/ai-components 5.0.19).
 - **Embeddings generation can fail with `504 Gateway Time-out`, masquerading as
   a CORS error.** AGO surfaces only a generic "There was an error generating AI
   vector embeddings." DevTools shows what looks like a CORS failure from

@@ -5,6 +5,10 @@ interface ImportMetaEnv {
   readonly VITE_PORTAL_URL: string;
   readonly VITE_WEBMAP_ID: string;
   readonly VITE_FEATURE_SERVICE_URL: string;
+  // Optional Baron Weather (premium) prototype — see src/lib/baron.ts.
+  readonly VITE_BARON_ITEM_ID?: string;
+  readonly VITE_BARON_WMS_URL?: string;
+  readonly VITE_BARON_WMS_LAYER?: string;
 }
 
 interface ImportMeta {

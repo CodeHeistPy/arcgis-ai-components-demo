@@ -147,6 +147,36 @@ hallucinates), cross-category comparison (silently degrades), unbounded
 cross-layer queries, charts, forecasts, email, user location. More in
 `CLAUDE.md` §5/§9.
 
+## Live feeds (real-time context)
+
+A scenario can layer real-time hazard feeds over its data via `liveFeeds` in
+`config.ts` (added client-side and toggled in the Layer List widget). The sample
+scenario wires **free Esri Living Atlas feeds** — NWS watches & warnings, USGS
+earthquakes, current wildfire perimeters, NOAA river gauges.
+
+> **Visual only, by default.** A feed added this way is *not* in the web map's
+> AI vector embeddings, so the assistant can **see** it but can't **answer
+> questions** about it. To make a feed queryable, add the layer to the web map
+> in ArcGIS Online, give it metadata, and re-generate embeddings (`CLAUDE.md`
+> §3/§9) — mind the wide-schema 504 gotcha.
+
+### Premium live feeds — Baron Weather (optional)
+
+For commercial-grade weather (satellite-derived radar, flash-flood risk, road
+weather, lightning, storm tracks), the app ships an **env-gated Baron Weather**
+prototype (`src/lib/baron.ts`). It stays inert unless you configure it, so a
+demo with no Baron subscription is unaffected.
+
+- **Preferred:** a **Baron-through-Esri** hosted item — per the expanded
+  Esri × Baron partnership, Baron products are purchasable through Esri and
+  delivered as ArcGIS map/feature services, so access rides on your existing
+  OAuth token (no signing). Set `VITE_BARON_ITEM_ID`.
+- **Or:** an OGC **WMS** endpoint via `VITE_BARON_WMS_URL` (+ optional
+  `VITE_BARON_WMS_LAYER`).
+- **Never** put a Baron secret/API key in a `VITE_` var — those ship in the
+  public browser bundle. Baron's signed tile/REST API must be signed
+  **server-side** (proxy). See `.env.example` and `src/lib/baron.ts`.
+
 ## Project layout
 
 ```
@@ -154,7 +184,7 @@ src/
 ├── main.tsx
 ├── App.tsx
 ├── components/
-│   ├── ScenarioShell.tsx     map + assistant
+│   ├── ScenarioShell.tsx     map + assistant + live-feed / widget wiring
 │   ├── ScenarioHeader.tsx    title bar (future: scenario switcher)
 │   ├── AuthGate.tsx          OAuth sign-in wall
 │   └── ErrorBoundary.tsx     surfaces render errors instead of a blank screen
@@ -164,7 +194,8 @@ src/
 │       └── prompts.ts
 └── lib/
     ├── arcgis.ts             SDK init + element registration + OAuth helpers
-    └── agents.ts             ScenarioConfig type
+    ├── baron.ts              optional Baron Weather (premium) live-feed loader
+    └── agents.ts             ScenarioConfig + LiveFeed types
 ```
 
 ## Documentation
