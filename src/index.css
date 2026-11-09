@@ -216,18 +216,80 @@ body {
   font-size: 0.72rem;
   color: var(--ink-muted);
 }
-.kpi-band__filter-pill {
-  position: absolute;
-  top: -8px;
-  right: 2px;
-  background: var(--accent);
-  color: #fff;
+/* Lens control: names the active lens (query / map view) and toggles the
+   "sync to map view" behavior. Sits at the right end of the KPI band and wraps
+   below the tiles on narrow widths. */
+.kpi-band__lens {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 6px;
+  padding: 0 2px;
+}
+.kpi-band__status {
   font-size: 0.64rem;
-  font-weight: 600;
-  letter-spacing: 0.03em;
-  padding: 2px 8px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+.kpi-band__status.is-narrowed {
+  color: var(--accent);
+}
+.lens-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--panel-border);
+  background: var(--panel);
   border-radius: 999px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  padding: 5px 12px 5px 8px;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--ink-muted);
+  transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
+}
+.lens-switch:hover {
+  border-color: var(--accent);
+  color: var(--ink);
+}
+.lens-switch.is-on {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: rgba(10, 123, 192, 0.08);
+}
+.lens-switch__track {
+  position: relative;
+  flex: 0 0 auto;
+  width: 30px;
+  height: 16px;
+  border-radius: 999px;
+  background: var(--track);
+  transition: background 0.15s ease;
+}
+.lens-switch.is-on .lens-switch__track {
+  background: var(--accent);
+}
+.lens-switch__thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+  transition: left 0.15s ease;
+}
+.lens-switch.is-on .lens-switch__thumb {
+  left: 16px;
+}
+.lens-switch__label {
+  white-space: nowrap;
 }
 
 /* Body: rail | map | assistant */

@@ -5,6 +5,9 @@ import type { DashboardState } from "./useDashboardStats";
 interface Props {
   state: DashboardState;
   cfg: DashboardConfig;
+  /** Whether the "sync to map view" lens is on. */
+  syncView: boolean;
+  onToggleSyncView: () => void;
 }
 
 interface Tile {
@@ -15,12 +18,14 @@ interface Tile {
 }
 
 /**
- * Full-width band of executive KPI tiles. Values reflect the assistant's
- * current query (the `current` stats); when a filter is active each tile shows
- * the filtered value with an "of <overall>" context line.
+ * Full-width band of executive KPI tiles. Values reflect the active lens (the
+ * assistant's query and/or the map extent, via `current`); the portfolio total
+ * stays visible as context on every tile, and a status label + toggle name the
+ * lens in force so a narrowed number always reads as "X of Y", never a lonely X.
  */
-export function KpiBand({ state, cfg }: Props) {
-  const { overall, current, filtered, status } = state;
+export function KpiBand({ state, cfg, syncView, onToggleSyncView }: Props) {
+  const { overall, current, filtered, viewSynced, status } = state;
+  const narrowed = filtered || viewSynced;
 
   const tiles: Tile[] =
     status === "ready" && overall && current
@@ -28,12 +33,12 @@ export function KpiBand({ state, cfg }: Props) {
           {
             label: "Projects",
             value: formatInt(current.count),
-            sub: filtered ? `of ${formatInt(overall.count)} total` : "in portfolio",
+            sub: narrowed ? `of ${formatInt(overall.count)} total` : "in portfolio",
           },
           {
             label: "High-Risk",
             value: formatInt(current.highRiskCount),
-            sub: filtered
+            sub: narrowed
               ? `of ${formatInt(overall.highRiskCount)}`
               : `${pct(overall.highRiskCount, overall.count)} of portfolio`,
             accent: true,
@@ -41,12 +46,12 @@ export function KpiBand({ state, cfg }: Props) {
           {
             label: "Contract Value",
             value: formatUSD(current.totalValue),
-            sub: filtered ? `of ${formatUSD(overall.totalValue)}` : "total active",
+            sub: narrowed ? `of ${formatUSD(overall.totalValue)}` : "total active",
           },
           {
             label: "Avg Composite Risk",
             value: formatRisk(current.avgRisk),
-            sub: filtered ? `portfolio ${formatRisk(overall.avgRisk)}` : "scale 1.8–6.3",
+            sub: narrowed ? `portfolio ${formatRisk(overall.avgRisk)}` : "scale 1.8–6.3",
           },
           {
             label: "Early-Const. Exposure",
@@ -57,6 +62,17 @@ export function KpiBand({ state, cfg }: Props) {
         ]
       : PLACEHOLDERS;
 
+  const statusLabel =
+    status !== "ready"
+      ? ""
+      : filtered && viewSynced
+        ? "Query + map view"
+        : filtered
+          ? "Current query"
+          : viewSynced
+            ? "In view"
+            : "Full portfolio";
+
   return (
     <div className="kpi-band" role="group" aria-label="Portfolio key metrics">
       {tiles.map((t) => (
@@ -66,11 +82,26 @@ export function KpiBand({ state, cfg }: Props) {
           <div className="kpi-tile__sub">{t.sub}</div>
         </div>
       ))}
-      {filtered && status === "ready" && (
-        <span className="kpi-band__filter-pill" title="Metrics reflect the assistant's current query">
-          Filtered by query
-        </span>
-      )}
+      <div className="kpi-band__lens">
+        {statusLabel && (
+          <span className={`kpi-band__status${narrowed ? " is-narrowed" : ""}`}>
+            {statusLabel}
+          </span>
+        )}
+        <button
+          type="button"
+          role="switch"
+          aria-checked={syncView}
+          className={`lens-switch${syncView ? " is-on" : ""}`}
+          onClick={onToggleSyncView}
+          title="When on, every metric reflects only the projects currently visible on the map. Pan or zoom to read a region."
+        >
+          <span className="lens-switch__track" aria-hidden="true">
+            <span className="lens-switch__thumb" />
+          </span>
+          <span className="lens-switch__label">Sync to map view</span>
+        </button>
+      </div>
     </div>
   );
 }

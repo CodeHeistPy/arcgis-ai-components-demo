@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import FeatureLayer from "@arcgis/core/layers/FeatureLayer";
 import type Layer from "@arcgis/core/layers/Layer";
 import { createBaronLayers } from "../lib/baron";
@@ -44,6 +44,15 @@ export function ScenarioShell({ scenario }: Props) {
   const mapRef = useRef<HTMLArcgisMapElement | null>(null);
   const assistantRef = useRef<HTMLElement | null>(null);
   const [mapEl, setMapEl] = useState<HTMLArcgisMapElement | null>(null);
+
+  // Stable ref callback: a new inline `ref={(el) => …}` every render makes React
+  // detach + reattach the ref on each render (e.g. when the lens toggles),
+  // thrashing mapEl and the stats effect. useCallback keeps one identity so the
+  // ref only fires on real mount / unmount of the <arcgis-map>.
+  const setMapRef = useCallback((el: HTMLArcgisMapElement | null) => {
+    mapRef.current = el;
+    setMapEl(el);
+  }, []);
 
   // Wire suggestedPrompts + entryMessage onto the assistant once it's mounted.
   useEffect(() => {
@@ -119,21 +128,27 @@ export function ScenarioShell({ scenario }: Props) {
       mapEl;
   }, [mapEl]);
 
-  // Executive-dashboard stats — reactive to the assistant's active filter.
+  // Executive-dashboard stats — reactive to the assistant's active filter and,
+  // when `syncView` is on, to the current map extent (pan/zoom to read a region).
   const dash = scenario.dashboard;
-  const stats = useDashboardStats(mapEl, dash);
+  const [syncView, setSyncView] = useState(false);
+  const stats = useDashboardStats(mapEl, dash, syncView);
 
   return (
     <div className="dash">
-      {dash && <KpiBand state={stats} cfg={dash} />}
+      {dash && (
+        <KpiBand
+          state={stats}
+          cfg={dash}
+          syncView={syncView}
+          onToggleSyncView={() => setSyncView((v) => !v)}
+        />
+      )}
       <div className={`dash-body${dash ? "" : " is-plain"}`}>
         {dash && <InsightsRail state={stats} cfg={dash} />}
         <div className="dash-map">
           <ArcgisMap
-            ref={(el) => {
-              mapRef.current = el;
-              setMapEl(el);
-            }}
+            ref={setMapRef}
             itemId={scenario.webmapId}
             style={{ width: "100%", height: "100%" }}
           >

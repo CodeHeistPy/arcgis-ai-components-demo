@@ -15,8 +15,10 @@ interface Props {
  * narrows the set. Charts are hand-rolled SVG/CSS — no chart dependency.
  */
 export function InsightsRail({ state, cfg }: Props) {
-  const { overall, current, filtered, status } = state;
+  const { overall, current, filtered, viewSynced, status } = state;
   const loading = status !== "ready" || !current || !overall;
+  const lensLabel =
+    filtered && viewSynced ? "query + view" : viewSynced ? "in view" : "current query";
 
   const tierSegs = orderSegments(current?.tier, cfg.tierOrder);
   const typeSegs = orderSegments(current?.type, cfg.typeOrder);
@@ -29,7 +31,9 @@ export function InsightsRail({ state, cfg }: Props) {
     <aside className="rail" aria-label="Portfolio insights">
       <div className="rail__head">
         <span>Insights</span>
-        {filtered && !loading && <span className="rail__chip">current query</span>}
+        {(filtered || viewSynced) && !loading && (
+          <span className="rail__chip">{lensLabel}</span>
+        )}
       </div>
 
       <section className="card rail__card">
